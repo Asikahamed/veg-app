@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Cart - VeggieShop{% endblock %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if cart_items %}
+    <ul>
+        {% for item in cart_items %}
+        <li>{{ item.product.name }} - Qty: {{ item.quantity }} - ₹{{ item.total_price }}</li>
+        {% endfor %}
+    </ul>
+    <!-- <p>Total: ₹{{ cart_total }}</p> -->
+    <form method="post" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <button type="submit">Checkout</button>
+    </form>
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

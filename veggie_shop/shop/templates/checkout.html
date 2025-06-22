@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h2>Checkout</h2>
+
+<ul>
+  {% for item in cart_items %}
+    <li>{{ item.product.name }} - Qty: {{ item.quantity }} - ₹{{ item.total_price }}</li>
+  {% endfor %}
+</ul>
+
+<p>Total: ₹{{ cart_total }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label for="address">Address:</label><br>
+    <textarea name="address" id="address" required rows="3" cols="40"></textarea>
+  </div>
+  <div>
+    <label for="contact_number">Contact Number:</label><br>
+    <input type="text" name="contact_number" id="contact_number" required>
+  </div>
+  <button type="submit">Place Order (COD)</button>
+</form>
+{% endblock %}
